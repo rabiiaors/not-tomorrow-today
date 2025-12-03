@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Not Tomorrow Today - To Do</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 16px;
+    }
+    .app {
+      width: 100%;
+      max-width: 420px;
+      background: #020617;
+      border-radius: 16px;
+      padding: 20px 18px 24px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+      border: 1px solid #1f2937;
+    }
+    .title {
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 13px;
+      text-align: center;
+      color: #9ca3af;
+      margin-bottom: 18px;
+    }
+    form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 14px;
+      outline: none;
+    }
+    input[type="text"]::placeholder { color: #6b7280; }
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      background: #4f46e5;
+      color: #f9fafb;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.1s ease;
+      white-space: nowrap;
+    }
+    button:hover {
+      background: #4338ca;
+      box-shadow: 0 0 0 1px rgba(129,140,248,0.4);
+      transform: translateY(-1px);
+    }
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #020617;
+      border: 1px solid #111827;
+      gap: 10px;
+    }
+    .text {
+      flex: 1;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    .delete-btn {
+      background: #b91c1c;
+      padding: 5px 9px;
+      font-size: 12px;
+    }
+    .delete-btn:hover { background: #dc2626; }
+    .empty {
+      font-size: 13px;
+      text-align: center;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <h1 class="title">Not Tomorrow Today</h1>
+  <p class="subtitle">Bugünün görevlerini bugüne bırak.</p>
+
+  <form id="todo-form">
+    <input id="todo-input" type="text" placeholder="Bir görev ekle..." autocomplete="off" />
+    <button type="submit">Ekle</button>
+  </form>
+
+  <ul id="todo-list"></ul>
+  <p id="empty-text" class="empty">Henüz görevin yok.</p>
+</div>
+
+<script>
+  const form = document.getElementById("todo-form");
+  const input = document.getElementById("todo-input");
+  const list = document.getElementById("todo-list");
+  const emptyText = document.getElementById("empty-text");
+
+  let todos = JSON.parse(localStorage.getItem("not_tomorrow_today_todos") || "[]");
+
+  function renderTodos() {
+    list.innerHTML = "";
+    if (todos.length === 0) {
+      emptyText.style.display = "block";
+      return;
+    }
+    emptyText.style.display = "none";
+
+    todos.forEach((task, index) => {
+      const li = document.createElement("li");
+
+      const span = document.createElement("span");
+      span.className = "text";
+      span.textContent = task;
+
+      const delBtn = document.createElement("button");
+      delBtn.className = "delete-btn";
+      delBtn.textContent = "Sil";
+      delBtn.onclick = () => {
+        todos.splice(index, 1);
+        saveAndRender();
+      };
+
+      li.appendChild(span);
+      li.appendChild(delBtn);
+      list.appendChild(li);
+    });
+  }
+
+  function saveAndRender() {
+    localStorage.setItem("not_tomorrow_today_todos", JSON.stringify(todos));
+    renderTodos();
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const value = input.value.trim();
+    if (!value) return;
+    todos.push(value);
+    input.value = "";
+    saveAndRender();
+  });
+
+  renderTodos();
+</script>
+</body>
+</html>
