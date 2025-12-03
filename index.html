@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Not Tomorrow Today</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="icon" type="image/png" href="static/images/icon.png" />
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,6 +22,40 @@
       margin: 0 auto;
     }
 
+    /* ⭐️ BAŞLIK – Premium Apple Glow */
+    .title-block {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .title-block h1 {
+      font-size: 48px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ffffff, #facc15, #fb923c, #ffffff);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: titleGlow 4s infinite linear;
+      filter: drop-shadow(0 0 6px rgba(255, 200, 80, 0.45));
+    }
+
+    @keyframes titleGlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position:   0% 50%; }
+    }
+
+    .title-block p {
+      margin-top: 6px;
+      font-size: 15px;
+      color: #d1d5db;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+
     .top-text {
       display: flex;
       justify-content: space-between;
@@ -30,26 +64,13 @@
       margin-bottom: 12px;
     }
 
-    .title-block h1 {
-      font-size: 24px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .title-block p {
-      margin-top: 4px;
-      font-size: 13px;
-      color: #cbd5f5;
-    }
-
     .date-text {
       font-size: 12px;
       color: #9ca3af;
       text-align: right;
     }
 
-    /* BÜYÜK SAAT */
-
+    /* SAAT */
     .clock-section {
       margin-top: 10px;
       margin-bottom: 30px;
@@ -82,8 +103,6 @@
       text-transform: uppercase;
     }
 
-    /* İKİ KOLON */
-
     .columns {
       display: grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
@@ -115,10 +134,6 @@
       gap: 6px;
     }
 
-    .panel-title span.icon {
-      font-size: 18px;
-    }
-
     .badge {
       font-size: 11px;
       padding: 3px 9px;
@@ -132,8 +147,6 @@
       background: rgba(22,163,74,0.18);
       border-color: rgba(74,222,128,0.7);
     }
-
-    /* INPUT + ÖNERİLER */
 
     .input-row {
       display: flex;
@@ -152,8 +165,6 @@
       outline: none;
     }
 
-    .input-row input::placeholder { color: #6b7280; }
-
     .btn {
       border: none;
       border-radius: 12px;
@@ -169,12 +180,6 @@
       background: linear-gradient(135deg,#4f46e5,#ec4899);
       color: #f9fafb;
       box-shadow: 0 10px 24px rgba(236,72,153,0.8);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(236,72,153,1);
-      opacity: 0.97;
     }
 
     .suggestions {
@@ -195,7 +200,6 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
-      transition: transform 0.08s ease, box-shadow 0.08s ease, border-color 0.08s ease;
     }
 
     .suggestion-card:nth-child(2) {
@@ -205,26 +209,6 @@
       background: radial-gradient(circle at top,#4ade80 0,#22c55e 42%,#22d3ee 100%);
     }
 
-    .suggestion-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .suggestion-time { font-weight: 600; font-size: 11px; }
-    .suggestion-emoji { font-size: 16px; }
-    .suggestion-label { font-size: 11px; }
-    .suggestion-add { font-size: 10px; text-align: right; opacity: 0.7; }
-
-    .suggestion-card:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(15,23,42,0.6);
-      border-color: rgba(15,23,42,0.5);
-    }
-
-    /* LİSTELER */
-
     .list {
       list-style: none;
       display: flex;
@@ -232,7 +216,6 @@
       gap: 8px;
       max-height: 230px;
       overflow-y: auto;
-      padding-right: 2px;
     }
 
     .item {
@@ -247,89 +230,42 @@
       font-size: 13px;
     }
 
-    .item-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .item-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: radial-gradient(circle,#22c55e 0,#15803d 45%,#052e16 100%);
-      box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
-      flex-shrink: 0;
-    }
-
-    .item-text {
-      flex: 1;
-      word-break: break-word;
-    }
-
-    .item-actions {
-      display: flex;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    .btn-small {
-      padding: 5px 8px;
-      font-size: 11px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-    }
-
-    .btn-done {
-      background: rgba(22,163,74,0.16);
-      color: #bbf7d0;
-      border-color: rgba(22,163,74,0.7);
-    }
-
-    .btn-done:hover { background: rgba(22,163,74,0.28); }
-
-    .btn-delete {
-      background: rgba(248,113,113,0.14);
-      color: #fecaca;
-      border-color: rgba(248,113,113,0.85);
-    }
-
-    .btn-delete:hover { background: rgba(248,113,113,0.30); }
-
     .item-done .item-text {
       text-decoration: line-through;
       color: #9ca3af;
     }
 
-    .empty {
-      font-size: 12px;
-      color: #6b7280;
-      text-align: center;
-      margin-top: 6px;
+    /* WhatsApp Sabit Buton */
+    .wp-share {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #25D366;
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 50px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      z-index: 999;
     }
 
-    @media (max-width: 900px) {
-      .clock-box { padding: 18px 16px; }
-      .clock-time { font-size: 64px; }
-    }
+    .wp-share:hover { background: #1ebe5d; }
 
-    @media (max-width: 768px) {
-      body { padding: 20px 10px 28px; }
-      .clock-time { font-size: 52px; }
-      .columns { grid-template-columns: 1fr; }
-      .suggestions { grid-template-columns: repeat(2,minmax(0,1fr)); }
-    }
   </style>
 </head>
 <body>
 <div class="page">
+
+  <div class="title-block">
+    <h1>NOT TOMORROW TODAY</h1>
+    <p>Bugün yapacaklarını net gör, küçük adımlarla ilerle.</p>
+  </div>
+
   <div class="top-text">
-    <div class="title-block">
-      <h1>NOT TOMORROW TODAY</h1>
-      <p>Bugün yapacaklarını net gör, küçük adımlarla ilerle.</p>
-    </div>
+    <div></div>
     <div class="date-text" id="date-text"></div>
   </div>
 
@@ -341,84 +277,84 @@
   </section>
 
   <div class="columns">
-    <!-- Yapılacaklar -->
-    <section class="panel" aria-label="Yapılacaklar">
+
+    <!-- YAPILACAKLAR -->
+    <section class="panel">
       <div class="panel-header">
-        <div class="panel-title">
-          <span class="icon">✏️</span> Yapılacaklar
-        </div>
+        <div class="panel-title">✏️ Yapılacaklar</div>
         <span class="badge" id="todo-count-badge">0 görev</span>
       </div>
 
       <div class="input-row">
-        <input id="todo-input" type="text"
-               placeholder="Bugün ne yapmak istiyorsun? Örn: 20 dk kitap okuma"
-               autocomplete="off" />
+        <input id="todo-input" type="text" placeholder="Bugün ne yapmak istiyorsun?" autocomplete="off" />
         <button class="btn btn-primary" id="add-btn" type="button">+ Ekle</button>
       </div>
 
       <div class="suggestions" id="suggestions"></div>
 
       <ul class="list" id="todo-list"></ul>
-      <p class="empty" id="todo-empty">
-        Henüz görevin yok. Yazabilir ya da renkli kartlardan ekleyebilirsin.
-      </p>
+      <p class="empty" id="todo-empty">Henüz görevin yok.</p>
     </section>
 
-    <!-- Yapıldı -->
-    <section class="panel" aria-label="Yapıldı">
+    <!-- YAPILDI -->
+    <section class="panel">
       <div class="panel-header">
-        <div class="panel-title">
-          <span class="icon">☑️</span> Yapıldı
-        </div>
+        <div class="panel-title">☑️ Yapıldı</div>
         <span class="badge" id="done-count-badge">0 görev</span>
       </div>
 
       <ul class="list" id="done-list"></ul>
-      <p class="empty" id="done-empty">
-        Tamamladığın görevler burada birikir. Gerekirse tek tıkla geri alabilirsin.
-      </p>
+      <p class="empty" id="done-empty">Tamamladığın görevler burada birikir.</p>
     </section>
+
   </div>
 </div>
 
+<!-- Sağ Alt WhatsApp Paylaş Butonu -->
+<button id="wp-share-btn" class="wp-share">WhatsApp'a Gönder</button>
+
 <script>
+
+  /* SAAT */
   const clockEl = document.getElementById("clock");
   const dateEl  = document.getElementById("date-text");
 
   function updateClock() {
     const now = new Date();
-    const hh = String(now.getHours()).padStart(2, "0");
-    const mm = String(now.getMinutes()).padStart(2, "0");
-    const ss = String(now.getSeconds()).padStart(2, "0");
-    clockEl.textContent = `${hh}:${mm}:${ss}`;
+    clockEl.textContent =
+      String(now.getHours()).padStart(2,"0") + ":" +
+      String(now.getMinutes()).padStart(2,"0") + ":" +
+      String(now.getSeconds()).padStart(2,"0");
   }
+
   function updateDate() {
     const now = new Date();
     const opts = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
     dateEl.textContent = now.toLocaleDateString("tr-TR", opts);
   }
+
+  setInterval(updateClock, 1000);
   updateClock();
   updateDate();
-  setInterval(updateClock, 1000);
 
+  /* LİSTE */
   let todos = JSON.parse(localStorage.getItem("ntt_todos") || "[]");
   let done  = JSON.parse(localStorage.getItem("ntt_done")  || "[]");
 
-  const todoListEl   = document.getElementById("todo-list");
-  const doneListEl   = document.getElementById("done-list");
-  const todoEmptyEl  = document.getElementById("todo-empty");
-  const doneEmptyEl  = document.getElementById("done-empty");
-  const todoCountEl  = document.getElementById("todo-count-badge");
-  const doneCountEl  = document.getElementById("done-count-badge");
-  const inputEl      = document.getElementById("todo-input");
-  const addBtn       = document.getElementById("add-btn");
-  const suggestionsEl= document.getElementById("suggestions");
+  const todoListEl = document.getElementById("todo-list");
+  const doneListEl = document.getElementById("done-list");
+  const todoEmptyEl = document.getElementById("todo-empty");
+  const doneEmptyEl = document.getElementById("done-empty");
+  const todoCountEl = document.getElementById("todo-count-badge");
+  const doneCountEl = document.getElementById("done-count-badge");
+  const inputEl = document.getElementById("todo-input");
+  const addBtn = document.getElementById("add-btn");
+  const suggestionsEl = document.getElementById("suggestions");
 
   const suggestions = [
-    { time: "09:30", label: "Güne sakin bir kahveyle başla", emoji: "☕" },
-    { time: "14:00", label: "20 dk odaklı çalışma / ders",   emoji: "📚" },
-    { time: "19:30", label: "Kısa yürüyüş + temiz hava",     emoji: "🚶‍♀️" }
+    { time: "09:30", label: "Güne sakin kahveyle başla", emoji: "☕" },
+    { time: "14:00", label: "20 dk odaklı ders", emoji: "📚" },
+    { time: "19:30", label: "Yürüyüş + temiz hava", emoji: "🚶‍♀️" }
   ];
 
   function save() {
@@ -429,67 +365,50 @@
   function updateBadges() {
     todoCountEl.textContent = `${todos.length} görev`;
     doneCountEl.textContent = `${done.length} görev`;
+
     todoEmptyEl.style.display = todos.length ? "none" : "block";
     doneEmptyEl.style.display = done.length ? "none" : "block";
   }
 
-  function createItemElement(text, isDone, index) {
+  function createItem(text, isDone, index) {
     const li = document.createElement("li");
     li.className = "item" + (isDone ? " item-done" : "");
 
-    const left = document.createElement("div");
-    left.className = "item-left";
+    const txt = document.createElement("span");
+    txt.className = "item-text";
+    txt.textContent = text;
 
-    const dot = document.createElement("div");
-    dot.className = "item-dot";
-
-    const span = document.createElement("span");
-    span.className = "item-text";
-    span.textContent = text;
-
-    left.appendChild(dot);
-    left.appendChild(span);
-
-    const actions = document.createElement("div");
-    actions.className = "item-actions";
-
-    if (!isDone) {
-      const doneBtn = document.createElement("button");
-      doneBtn.className = "btn btn-small btn-done";
-      doneBtn.textContent = "Tamamla";
-      doneBtn.addEventListener("click", () => {
-        const [task] = todos.splice(index, 1);
-        done.unshift(task);
-        render();
-        save();
-      });
-      actions.appendChild(doneBtn);
-    } else {
-      const backBtn = document.createElement("button");
-      backBtn.className = "btn btn-small btn-done";
-      backBtn.textContent = "Geri al";
-      backBtn.addEventListener("click", () => {
-        const [task] = done.splice(index, 1);
-        todos.unshift(task);
-        render();
-        save();
-      });
-      actions.appendChild(backBtn);
-    }
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.className = "btn btn-small btn-delete";
-    deleteBtn.textContent = "Sil";
-    deleteBtn.addEventListener("click", () => {
-      if (isDone) done.splice(index, 1);
-      else        todos.splice(index, 1);
+    const del = document.createElement("button");
+    del.textContent = "Sil";
+    del.className = "btn btn-small btn-delete";
+    del.onclick = () => {
+      if (isDone) done.splice(index,1);
+      else todos.splice(index,1);
       render();
-      save();
-    });
+    };
 
-    actions.appendChild(deleteBtn);
-    li.appendChild(left);
-    li.appendChild(actions);
+    const act = document.createElement("button");
+    act.className = "btn btn-small btn-done";
+    act.textContent = isDone ? "Geri al" : "Tamamla";
+    act.onclick = () => {
+      if (isDone) {
+        const [t] = done.splice(index,1);
+        todos.unshift(t);
+      } else {
+        const [t] = todos.splice(index,1);
+        done.unshift(t);
+      }
+      render();
+    };
+
+    const right = document.createElement("div");
+    right.style.display = "flex";
+    right.style.gap = "6px";
+    right.appendChild(act);
+    right.appendChild(del);
+
+    li.appendChild(txt);
+    li.appendChild(right);
     return li;
   }
 
@@ -497,48 +416,52 @@
     todoListEl.innerHTML = "";
     doneListEl.innerHTML = "";
 
-    todos.forEach((t, i) => todoListEl.appendChild(createItemElement(t,false,i)));
-    done.forEach((t, i) => doneListEl.appendChild(createItemElement(t,true,i)));
+    todos.forEach((t,i)=> todoListEl.appendChild(createItem(t,false,i)));
+    done.forEach((t,i)=> doneListEl.appendChild(createItem(t,true,i)));
 
     updateBadges();
-  }
-
-  function addTask(text) {
-    const value = text.trim();
-    if (!value) return;
-    todos.unshift(value);
-    inputEl.value = "";
-    render();
     save();
   }
 
-  addBtn.addEventListener("click", () => addTask(inputEl.value));
-  inputEl.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      addTask(inputEl.value);
-    }
-  });
+  function addTask(text) {
+    const v = text.trim();
+    if (!v) return;
+    todos.unshift(v);
+    inputEl.value = "";
+    render();
+  }
 
-  suggestions.forEach((s) => {
+  addBtn.onclick = () => addTask(inputEl.value);
+  inputEl.onkeydown = e => { if (e.key==="Enter") { e.preventDefault(); addTask(inputEl.value); } };
+
+  suggestions.forEach(s => {
     const card = document.createElement("button");
-    card.type = "button";
     card.className = "suggestion-card";
     card.innerHTML = `
-      <div class="suggestion-top">
-        <span class="suggestion-time">${s.time}</span>
-        <span class="suggestion-emoji">${s.emoji}</span>
-      </div>
-      <div class="suggestion-label">${s.label}</div>
-      <div class="suggestion-add">Dokun → listeye ekle</div>
-    `;
-    card.addEventListener("click", () =>
-      addTask(`${s.emoji} ${s.time} • ${s.label}`)
-    );
+      <div class="suggestion-top"><span>${s.time}</span><span>${s.emoji}</span></div>
+      <div>${s.label}</div>
+      <div style="font-size:10px;opacity:.7;text-align:right;">Dokun → ekle</div>`;
+    card.onclick = () => addTask(`${s.emoji} ${s.time} • ${s.label}`);
     suggestionsEl.appendChild(card);
   });
 
   render();
+
+  /* WhatsApp Paylaş */
+  document.getElementById("wp-share-btn").onclick = () => {
+    let text = "Not Tomorrow Today – Günlük Rapor\n\n";
+
+    text += "Yapılacaklar:\n";
+    if (!todos.length) text += "- (boş)\n";
+    else todos.forEach(t=> text += "• " + t + "\n");
+
+    text += "\nTamamlananlar:\n";
+    if (!done.length) text += "- (boş)\n";
+    else done.forEach(t=> text += "• " + t + "\n");
+
+    window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+  };
+
 </script>
 </body>
 </html>
