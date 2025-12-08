@@ -15,6 +15,7 @@ Renkli kartlar ve emoji destekli motivasyon
 
 Veriler LocalStorage’da saklanır
 
-Mobil ve masaüstü uyumlu sade tasarım
-https://rabiiaors.github.io/not-tomorrow-today/       Adresi ile giriş sağlayabilirsiniz
+Mobil ve masaüstü uyumlu sade tasarım        
+       https://rabiiaors.github.io/not-tomorrow-today/       
+       Adresi ile giriş sağlayabilirsiniz
 
